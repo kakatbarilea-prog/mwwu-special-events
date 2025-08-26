@@ -244,6 +244,107 @@
   .footer-bottom-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
   .footer-bottom a{color:#999;margin-left:14px}
   .footer-bottom a:hover{color:#fff}
+
+/* ====== CHECKOUT MODAL ====== */
+  body.no-scroll{ overflow:hidden; }
+
+  .modal[hidden]{ display:none !important; }
+  .modal{
+    position:fixed; inset:0; z-index:100;
+    display:flex; align-items:flex-start; justify-content:center;
+    padding:40px 14px;
+    background:rgba(0,0,0,.45); backdrop-filter:saturate(120%) blur(2px);
+    overflow:auto;
+  }
+  .ck-dialog{
+    position:relative; width:100%; max-width:980px; background:#fff; color:#111827;
+    border-radius:16px; box-shadow:0 30px 80px rgba(0,0,0,.35);
+  }
+  .ck-close{
+    position:absolute; top:10px; right:10px; width:40px; height:40px; border:0;
+    border-radius:50%; background:rgba(0,0,0,.6); color:#fff; font-size:20px; cursor:pointer;
+  }
+
+  .ck-head{ padding:18px 20px 8px; border-bottom:1px solid var(--line); }
+  .ck-title{ margin:0; font-size:clamp(20px,3vw,28px); font-weight:500; letter-spacing:.2px; }
+
+  .ck-grid{
+    display:grid; gap:24px;
+    grid-template-columns: minmax(0,1.2fr) minmax(0,.85fr);
+    padding:14px 20px 20px;
+  }
+  @media (max-width:900px){ .ck-grid{ grid-template-columns:1fr; } }
+
+  /* Left/form */
+  .ck-section-title{ margin:6px 0 6px; color:var(--brand); font-weight:800; }
+  .ck-note{ margin:0 0 10px; color:#6b7280; }
+  .ck-note a{ color:var(--brand); text-decoration:underline; font-weight:600; }
+
+  .ck-form .row{ display:grid; gap:12px; grid-template-columns:1fr 1fr; }
+  @media (max-width:640px){ .ck-form .row{ grid-template-columns:1fr; } }
+  .ck-field{ display:flex; flex-direction:column; gap:6px; }
+  .ck-field input{
+    font:inherit; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#fff; color:#111827;
+    transition:border-color .2s, box-shadow .2s, background-color .2s;
+  }
+  .ck-form.was-validated input:invalid{
+    border-color:#ef4444; background:#fff7f7;
+    box-shadow:0 0 0 3px rgba(239,68,68,.12);
+  }
+
+  .ck-check{ display:flex; align-items:center; gap:10px; margin:8px 0 10px; user-select:none; }
+  .ck-check input{ width:18px; height:18px; }
+
+  #accountFields{ display:none; }
+  #accountFields.open{ display:grid; gap:12px; grid-template-columns:1fr 1fr; }
+  @media (max-width:640px){ #accountFields.open{ grid-template-columns:1fr; } }
+
+  .ck-terms{ margin:8px 0 14px; font-size:14px; color:#4b5563; }
+  .ck-terms a{ color:var(--brand); text-decoration:underline; }
+
+  .ck-submit{
+    width:min(260px,100%); height:46px; border-radius:10px; border:0;
+    background:linear-gradient(180deg,var(--brand),var(--brand-2)); color:#fff; font-weight:800; letter-spacing:.02em;
+    cursor:pointer; box-shadow:0 10px 24px rgba(128,0,128,.25);
+  }
+  .ck-submit:hover{ filter:saturate(1.06); transform:translateY(-1px); }
+
+  /* Right/summary */
+  .ck-summary{
+    border:1px solid var(--line); border-radius:14px; overflow:hidden; align-self:start;
+  }
+  .ck-sum-media{ background:#eee; }
+  .ck-sum-media img{ display:block; width:100%; height:auto; }
+  .ck-sum-body{ padding:14px; }
+  .ck-sum-title{ margin:0 0 6px; font-weight:800; }
+  .ck-sum-meta{ color:#6b7280; font-size:14px; line-height:1.4; margin-bottom:10px; }
+  .ck-sum-row{ display:flex; justify-content:space-between; padding:8px 0; border-top:1px solid var(--line); }
+  .ck-total{ font-weight:900; }
+
+  /* ===== Leave dialog ===== */
+  .confirm-dialog{
+    width:100%; max-width:720px; background:#fff; color:#111827; border-radius:16px;
+    box-shadow:0 30px 80px rgba(0,0,0,.35); padding:28px 20px; text-align:center; position:relative;
+  }
+  .leave-title{ margin:0 0 10px; font-size:clamp(26px,4vw,36px); font-weight:800; }
+  .leave-note{ color:#6b7280; max-width:640px; margin:0 auto 18px; }
+  .leave-actions{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .btn-leave{ padding:12px 24px; border-radius:10px; border:1px solid #111; background:#fff; font-weight:700; }
+  .btn-exit{ padding:12px 24px; border-radius:10px; border:0; background:linear-gradient(180deg,var(--brand),var(--brand-2)); color:#fff; font-weight:800; }
+
+/* Vertical space between one field block and the next (ALL fields) */
+#checkoutModal .ck-form .row,
+#checkoutModal .ck-form > .ck-field{
+  margin-bottom: 18px;   /* <-- adjust to taste (e.g., 20–24px) */
+}
+
+/* Keep the two password fields nicely spaced when revealed */
+#checkoutModal #accountFields.open .ck-field{
+  margin-bottom: 12px;
+}
+
+
+
 </style>
 </head>
 <body>
@@ -442,6 +543,115 @@
   </div>
 </footer>
 
+<!-- ===== CHECKOUT MODALS ===== -->
+<!-- Checkout -->
+<div id="checkoutModal" class="modal" hidden aria-hidden="true">
+  <div class="ck-dialog" role="dialog" aria-modal="true" aria-labelledby="ckTitle">
+    <button class="ck-close" id="ckClose" aria-label="Close">×</button>
+    <div class="ck-head">
+      <h2 id="ckTitle" class="ck-title">Checkout</h2>
+    </div>
+
+    <div class="ck-grid">
+      <!-- Left: form -->
+      <section>
+        <h3 class="ck-section-title">Contact information</h3>
+        <p class="ck-note">Already have a Make Wine With Us account? <a href="#">Login here</a>.</p>
+
+        <form id="ckForm" class="ck-form" novalidate>
+          <div class="row">
+            <div class="ck-field">
+              <label for="firstName">First name*</label>
+              <input id="firstName" name="firstName" type="text" required />
+            </div>
+            <div class="ck-field">
+              <label for="lastName">Last name*</label>
+              <input id="lastName" name="lastName" type="text" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="ck-field">
+              <label for="email">Primary Email*</label>
+              <input id="email" name="email" type="email" required placeholder="you@example.com" />
+            </div>
+            <div class="ck-field">
+              <label for="phone">Primary Phone*</label>
+              <input id="phone" name="phone" type="tel" required placeholder="(201) 876-9463" pattern="^[0-9+\\-\\s()]{10,}$" />
+            </div>
+          </div>
+
+          <div class="ck-field" style="max-width:220px">
+            <label for="ckQty">Quantity Of People*</label>
+            <input id="ckQty" name="ckQty" type="number" min="1" step="1" required />
+          </div>
+
+          <label class="ck-check">
+            <input type="checkbox" id="createAccount" />
+            <span>Create Account.</span>
+          </label>
+
+          <div id="accountFields">
+            <div class="ck-field">
+              <label for="password">Password*</label>
+              <input id="password" type="password" minlength="6" />
+            </div>
+            <div class="ck-field">
+              <label for="confirmPassword">Confirm Password*</label>
+              <input id="confirmPassword" type="password" minlength="6" />
+            </div>
+          </div>
+
+          <p class="ck-terms">
+            By selecting Register, I agree to the
+            <a href="https://makewinewithus.com/terms-of-service" target="_blank" rel="noopener">Make Wine With Us Terms of Service</a>.
+          </p>
+
+          <button class="ck-submit" type="submit">Register Now</button>
+        </form>
+      </section>
+
+      <!-- Right: summary -->
+      <aside class="ck-summary" aria-label="Order summary">
+        <div class="ck-sum-media">
+          <img src="https://d34hmiuaex7c0.cloudfront.net/3719/uploads/class_course_featured_1752156232315.png" alt="" />
+        </div>
+        <div class="ck-sum-body">
+          <h4 class="ck-sum-title">The Boys Are Back In Town</h4>
+          <div class="ck-sum-meta">
+            Saturday September 13, 2025 06:30 PM<br/>America/New_York
+          </div>
+
+          <div class="ck-sum-row">
+            <span id="sumLine">1 × The Boys Are Back In Town</span>
+            <span id="sumPrice">$30.00</span>
+          </div>
+          <div class="ck-sum-row">
+            <span>Sales Tax:</span><span>$0</span>
+          </div>
+          <div class="ck-sum-row ck-total">
+            <span>Total</span><span id="sumTotal">$30</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- Leave confirmation -->
+<div id="leaveModal" class="modal" hidden aria-hidden="true">
+  <div class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="leaveTitle">
+    <h2 id="leaveTitle" class="leave-title">Leave Checkout?</h2>
+    <p class="leave-note">Are you sure you want to leave checkout? The items you've selected may not be available later.</p>
+    <div class="leave-actions">
+      <button id="stayBtn" class="btn-leave">Stay</button>
+      <button id="leaveBtn" class="btn-exit">Leave</button>
+    </div>
+  </div>
+</div>
+
+
+
 <!-- ===== Quantity / Register behavior ===== -->
 <script>
   (function(){
@@ -449,43 +659,135 @@
     const plus  = document.getElementById('qtyPlus');
     const input = document.getElementById('qty');
     const btn   = document.getElementById('regBtn');
-const box = document.querySelector('.buy-box');
+    const box   = document.querySelector('.buy-box');
 
+    const ckModal = document.getElementById('checkoutModal');
+    const leaveModal = document.getElementById('leaveModal');
+    const ckClose = document.getElementById('ckClose');
+    const ckForm = document.getElementById('ckForm');
+    const ckQty = document.getElementById('ckQty');
+    const sumLine = document.getElementById('sumLine');
+    const sumPrice = document.getElementById('sumPrice');
+    const sumTotal = document.getElementById('sumTotal');
+    const createAccount = document.getElementById('createAccount');
+    const accountFields = document.getElementById('accountFields');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    const stayBtn = document.getElementById('stayBtn');
+    const leaveBtn = document.getElementById('leaveBtn');
 
+    const PRICE = 30; // USD
+    function clamp(n){ n = Math.floor(+n || 0); return Math.max(0, Math.min(99, n)); }
 
-    function clamp(n){ 
-      n = Math.floor(+n || 0);
-      if(n < 0) n = 0;
-      if(n > 99) n = 99;
-      return n;
-    }
-
-    function update(){
+    function updateBuy(){
       const q = clamp(input.value);
       input.value = q;
       const active = q > 0;
       btn.disabled = !active;
       btn.classList.toggle('is-active', active);
-box.classList.toggle('is-active', active);
-
+      box.classList.toggle('is-active', active);
     }
 
-    minus.addEventListener('click', () => { input.value = clamp(input.value) - 1; update(); });
-    plus .addEventListener('click', () => { input.value = clamp(input.value) + 1; update(); });
-    input.addEventListener('input', update);
+    minus.addEventListener('click', () => { input.value = clamp(input.value) - 1; updateBuy(); });
+    plus .addEventListener('click', () => { input.value = clamp(input.value) + 1; updateBuy(); });
+    input.addEventListener('input', updateBuy);
+    updateBuy();
 
-    // Replace with your real checkout flow if needed
+    /* ---- Modal helpers ---- */
+    function openModal(m){
+      m.hidden = false;
+      m.setAttribute('aria-hidden','false');
+      document.body.classList.add('no-scroll');
+    }
+    function closeModal(m){
+      m.hidden = true;
+      m.setAttribute('aria-hidden','true');
+      if (document.querySelectorAll('.modal:not([hidden])').length === 0){
+        document.body.classList.remove('no-scroll');
+      }
+    }
+
+    function updateSummary(q){
+      const qty = Math.max(1, Math.floor(q || 1));
+      sumLine.textContent = qty + " × The Boys Are Back In Town";
+      const itemPrice = (PRICE * qty).toFixed(2);
+      sumPrice.textContent = "$" + (PRICE).toFixed(2);
+      sumTotal.textContent = "$" + itemPrice;
+    }
+
+    // Open checkout
     btn.addEventListener('click', () => {
       if(btn.disabled) return;
-      // window.location.href = `/checkout?event=boys-back-in-town&qty=${input.value}`;
+      ckForm.reset();                         // clear previous entries
+      ckForm.classList.remove('was-validated');
+      // set qty from sidebar, default to 1 if somehow zero
+      const startQty = Math.max(1, clamp(input.value));
+      ckQty.value = startQty;
+      updateSummary(startQty);
+      openModal(ckModal);
     });
 
-    update();
+    // qty change inside checkout
+    ckQty.addEventListener('input', () => {
+      const q = Math.max(1, clamp(ckQty.value));
+      ckQty.value = q;
+      updateSummary(q);
+    });
+
+    // Create account reveal
+    createAccount.addEventListener('change', () => {
+      accountFields.classList.toggle('open', createAccount.checked);
+      // Make pw required only if checked
+      password.required = confirmPassword.required = createAccount.checked;
+    });
+
+    // Close (X) -> show leave modal
+    ckClose.addEventListener('click', () => {
+      openModal(leaveModal);
+    });
+
+    // Leave confirmation buttons
+    stayBtn.addEventListener('click', () => { closeModal(leaveModal); /* back to checkout */ });
+    leaveBtn.addEventListener('click', () => { closeModal(leaveModal); closeModal(ckModal); });
+
+    // Click outside dialog to keep behavior tight (don’t close)
+    ckModal.addEventListener('click', (e) => {
+      if(e.target === ckModal){ /* do nothing to avoid accidental close */ }
+    });
+    leaveModal.addEventListener('click', (e) => {
+      if(e.target === leaveModal){ closeModal(leaveModal); }  // tap outside = cancel leave
+    });
+
+    // Submit with validation-once behavior
+    ckForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      ckForm.classList.add('was-validated');
+
+      // simple confirm password check
+      if (createAccount.checked && password.value !== confirmPassword.value){
+        confirmPassword.setCustomValidity("Passwords do not match");
+      } else {
+        confirmPassword.setCustomValidity("");
+      }
+
+      if (!ckForm.checkValidity()){
+        // invalid → show reds via .was-validated
+        return;
+      }
+
+      // Success path (placeholder)
+      closeModal(ckModal);
+      alert("Thanks! Your registration has been started for " + ckQty.value + " ticket(s).");
+      // TODO: replace alert with real checkout integration as needed.
+    });
   })();
 </script>
 
+
 </body>
 </html>
+
+
 
 
 
