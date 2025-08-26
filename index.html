@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Make Wine With Us — Event Registration</title>
+<title>Make Wine With Us — Special Events (Sections Only)</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
   :root{
-    --brand:#800080;      /* main brand purple */
-    --brand-2:#9a329a;    /* subtle gradient stop */
-    --ink:#2b2b2b;        /* body text */
-    --muted:#6b7280;      /* secondary text */
+    --brand:#800080;
+    --brand-2:#9a329a;
+    --ink:#2b2b2b;
+    --muted:#6b7280;
     --bg:#ffffff;
     --line:#e9e9ee;
     --radius:14px;
   }
 
-  /* Base */
+  /* Base (needed by sections) */
   *{box-sizing:border-box}
   html,body{
     margin:0;
@@ -27,102 +27,12 @@
   }
   a{color:inherit;text-decoration:none}
   .container{max-width:1200px;margin:0 auto;padding:0 16px}
-
-  /* Announcement */
-  .announce{background:var(--brand);color:#fff;font-size:14px;line-height:1.3}
-  .announce-inner{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 0}
-  .announce a{color:#fff;text-decoration:underline}
-
-  /* Header */
-  header{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:50}
-  .bar{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:14px 0}
-  .brand{display:flex;align-items:center;gap:12px;min-width:0}
-  .brand img{height:56px;width:auto;display:block}
-  nav{display:flex;align-items:center;justify-content:center}
-  .nav{display:flex;gap:24px;list-style:none;margin:0;padding:0;font-size:16px}
-  .nav a{color:#4b5563;font-weight:600}
-  .nav a:hover{color:var(--brand)}
-
-  .actions{display:flex;align-items:center;gap:12px;white-space:nowrap}
-  .phone{display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;font-weight:600;color:#1f2937;background:#fff}
-  .phone svg{width:16px;height:16px}
-  .social{display:flex;gap:8px}
-  .social a{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center}
-  .social a:hover{border-color:var(--brand)}
-  .btn{display:inline-flex;align-items:center;justify-content:center;height:38px;padding:0 14px;border-radius:999px;border:1px solid transparent;font-weight:700;font-size:15px;cursor:pointer;transition:transform .04s ease, box-shadow .2s ease;font-family:inherit}
-  .btn:active{transform:translateY(1px)}
-  .btn.primary{background:linear-gradient(180deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 6px 16px rgba(128,0,128,.25)}
-  .btn.primary:hover{background:linear-gradient(180deg,var(--brand-2),var(--brand));box-shadow:0 8px 20px rgba(128,0,128,.35);transform:translateY(-1px)}
-  .btn.ghost{background:#fff;border-color:var(--line);color:#1f2937}
-  .btn.ghost:hover{border-color:var(--brand);color:var(--brand)}
-  .hamburger{display:none}
-  #nav-toggle{display:none}
-  @media (max-width:980px){
-    .bar{grid-template-columns:auto auto 1fr;gap:10px}
-    .brand img{height:48px}
-    .hamburger{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:#fff;cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:700;color:#374151}
-    nav{justify-content:flex-end}
-    .nav{position:fixed;inset:64px 16px auto 16px;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--line);background:#fff;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.08);display:none;z-index:60}
-    #nav-toggle:checked ~ nav .nav{display:flex}
-    .actions{gap:8px}
-    .phone{padding:6px 10px}
-    .btn{height:36px;padding:0 12px}
-  }
-  a:focus-visible,.btn:focus-visible,.hamburger:focus-visible,.phone:focus-visible{outline:3px solid rgba(128,0,128,.35);outline-offset:2px;border-radius:12px}
-
-  /* --- Dropdowns (fixed) --- */
-  .nav li{ position:relative; }
-  .subnav{
-    position:absolute;
-    top:100%;
-    left:0;
-    min-width:220px;
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:12px;
-    box-shadow:0 14px 36px rgba(0,0,0,.12);
-    padding:8px;
-    opacity:0;
-    transform:translateY(6px);
-    pointer-events:none;
-    transition:opacity .15s ease, transform .15s ease;
-    z-index:70;
-  }
-  .subnav::before{
-    content:"";
-    position:absolute;
-    left:0; right:0;
-    top:-8px;
-    height:8px;
-  }
-  .has-sub:hover > .subnav,
-  .has-sub:focus-within > .subnav{
-    opacity:1;
-    transform:translateY(0);
-    pointer-events:auto;
-  }
-  .subnav a{
-    display:block;
-    padding:9px 10px;
-    border-radius:8px;
-    color:#374151;
-    font-weight:600;
-    white-space:nowrap;
-  }
-  .subnav a:hover{ background:#faf7fb; color:var(--brand); }
-
-  @media (max-width:980px){
-    .nav .subnav{
-      position:static; border:0; box-shadow:none; opacity:1; transform:none; pointer-events:auto; padding:6px 0 0;
-    }
-    .nav .subnav::before{ display:none; }
-    .nav .subnav a{ padding:8px 10px 8px 14px; }
-  }
+  a:focus-visible{outline:3px solid rgba(128,0,128,.35);outline-offset:2px;border-radius:12px}
 
   /* ===== Registration page sections ===== */
   #event-reg{ padding:clamp(22px,4vw,44px) 0; }
 
-  /* Featured image — always 16:9 crop (1920×1080 look) */
+  /* Featured image — 16:9 crop */
   .hero-figure{ max-width:1100px; margin:0 auto 22px; }
   .hero-16x9{
     aspect-ratio:16/9;
@@ -148,7 +58,7 @@
   }
   .eyebrow{ margin:22px 0 8px; font-weight:800; color:#111827; }
 
-  /* Purple meta lines (not the headings) */
+  /* Purple meta lines */
   .meta-line{
     display:flex; align-items:center; gap:10px;
     color:var(--brand); font-weight:700;
@@ -170,22 +80,18 @@
 
   /* Purchase box */
   .buy{ position:relative; }
-/* DEFAULT: gray box */
-.buy-box{
-  border:2px solid var(--line);          /* was var(--brand) */
-  border-radius:14px;
-  background:#fff;
-  padding:14px;
-  box-shadow:0 8px 22px rgba(0,0,0,.06); /* neutral shadow */
-  transition:border-color .2s ease, box-shadow .2s ease;
-}
-
-/* ACTIVE (qty > 0): purple box */
-.buy-box.is-active{
-  border-color:var(--brand);
-  box-shadow:0 8px 22px rgba(128,0,128,.18);
-}
-
+  .buy-box{
+    border:2px solid var(--line);
+    border-radius:14px;
+    background:#fff;
+    padding:14px;
+    box-shadow:0 8px 22px rgba(0,0,0,.06);
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .buy-box.is-active{
+    border-color:var(--brand);
+    box-shadow:0 8px 22px rgba(128,0,128,.18);
+  }
 
   .buy-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
   .buy-title{ font-weight:800; color:#111827; }
@@ -219,33 +125,7 @@
   }
   .reg-btn.is-active:hover{ transform:translateY(-1px); filter:saturate(1.05); }
 
-  /* Footer (unchanged) */
-  .site-footer{background:#111;color:#ddd;font-size:15px;line-height:1.6;padding-top:50px}
-  .footer-grid{display:grid;gap:40px;grid-template-columns: 1.2fr 1fr 1fr}
-  @media(max-width:900px){ .footer-grid{grid-template-columns:1fr 1fr} }
-  @media(max-width:640px){ .footer-grid{grid-template-columns:1fr} }
-  .foot-title{color:#fff;font-weight:800;margin:0 0 12px;font-size:16px;text-transform:uppercase;position:relative}
-  .foot-title::after{content:"";display:block;width:40px;height:2px;background:var(--brand);margin-top:6px}
-  .footer-text{margin-bottom:14px;max-width:500px;color:#ccc}
-  .footer-cta{margin-top:6px;display:inline-block;font-size:14px;padding:8px 18px}
-  .footer-social{margin-top:16px;display:flex;gap:12px}
-  .footer-social a{width:34px;height:34px;border-radius:50%;background:#222;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:15px}
-  .footer-social a:hover{background:var(--brand);color:#fff}
-  .foot-links{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 24px}
-  .foot-links a{color:#ddd;font-weight:500}
-  .foot-links a:hover{color:#fff}
-  .contact-list{list-style:none;padding:0;margin:0 0 14px;display:flex;flex-direction:column;gap:10px}
-  .contact-list i{margin-right:8px;color:var(--brand)}
-  .contact-list a{color:#ddd}
-  .contact-list a:hover{color:#fff}
-  .hours-label{display:block;font-size:13px;color:#aaa;margin-bottom:2px;text-transform:uppercase}
-  .hours-value{color:#eee}
-  .footer-bottom{border-top:1px solid #222;margin-top:40px;padding:18px 0;font-size:13px;color:#999}
-  .footer-bottom-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
-  .footer-bottom a{color:#999;margin-left:14px}
-  .footer-bottom a:hover{color:#fff}
-
-/* ====== CHECKOUT MODAL ====== */
+  /* ====== CHECKOUT MODALS ====== */
   body.no-scroll{ overflow:hidden; }
 
   .modal[hidden]{ display:none !important; }
@@ -321,7 +201,7 @@
   .ck-sum-row{ display:flex; justify-content:space-between; padding:8px 0; border-top:1px solid var(--line); }
   .ck-total{ font-weight:900; }
 
-  /* ===== Leave dialog ===== */
+  /* Leave dialog */
   .confirm-dialog{
     width:100%; max-width:720px; background:#fff; color:#111827; border-radius:16px;
     box-shadow:0 30px 80px rgba(0,0,0,.35); padding:28px 20px; text-align:center; position:relative;
@@ -332,28 +212,181 @@
   .btn-leave{ padding:12px 24px; border-radius:10px; border:1px solid #111; background:#fff; font-weight:700; }
   .btn-exit{ padding:12px 24px; border-radius:10px; border:0; background:linear-gradient(180deg,var(--brand),var(--brand-2)); color:#fff; font-weight:800; }
 
-/* Vertical space between one field block and the next (ALL fields) */
-#checkoutModal .ck-form .row,
-#checkoutModal .ck-form > .ck-field{
-  margin-bottom: 18px;   /* <-- adjust to taste (e.g., 20–24px) */
+  /* Vertical spacing for fields in checkout */
+  #checkoutModal .ck-form .row,
+  #checkoutModal .ck-form > .ck-field{
+    margin-bottom: 18px;
+  }
+  #checkoutModal #accountFields.open .ck-field{
+    margin-bottom: 12px;
+  }
+  :root{
+    --brand:#800080;      /* main brand purple */
+    --brand-2:#9a329a;    /* subtle gradient stop */
+    --ink:#2b2b2b;        /* body text */
+    --muted:#6b7280;      /* secondary text */
+    --bg:#ffffff;
+    --line:#e9e9ee;
+    --radius:14px;
+  }
+
+  /* Base */
+  *{box-sizing:border-box}
+  html,body{
+    margin:0;
+    font-family:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+  }
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1200px;margin:0 auto;padding:0 16px}
+
+  /* Announcement */
+  .announce{background:var(--brand);color:#fff;font-size:14px;line-height:1.3}
+  .announce-inner{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 0}
+  .announce a{color:#fff;text-decoration:underline}
+
+  /* Header */
+  header{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:50}
+  .bar{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:14px 24px;max-width:none;width:100%;margin:0}
+  .brand{display:flex;align-items:center;gap:12px;min-width:0}
+  .brand img{height:56px;width:auto;display:block}
+  nav{display:flex;align-items:center;justify-content:center}
+  .nav{display:flex;list-style:none;margin:0;padding:0;font-size:16px;width:100%;justify-content:space-evenly;flex-wrap:nowrap;white-space:nowrap;gap:0}
+  .nav a{color:#4b5563;font-weight:600}
+  .nav a:hover{color:var(--brand)}
+
+  /* Prevent nav items from shrinking; spacing absorbs resize */
+  .nav > li{flex:0 0 auto}
+
+  .actions{display:flex;align-items:center;gap:12px;white-space:nowrap}
+  .phone{display:flex;align-items:center;gap:8px;padding:8px 12px;border:none;border-radius:999px;font-weight:600;color:#1f2937;background:#fff}
+  .phone svg{width:16px;height:16px}
+  .social{display:flex;gap:8px}
+  .social a{width:34px;height:34px;border-radius:50%;border:none;display:inline-flex;align-items:center;justify-content:center}
+  .social a:hover{border-color:var(--brand)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;height:38px;padding:0 14px;border-radius:999px;border:1px solid transparent;font-weight:700;font-size:15px;cursor:pointer;transition:transform .04s ease, box-shadow .2s ease;font-family:inherit}
+  .btn:active{transform:translateY(1px)}
+  .btn.primary{background:linear-gradient(180deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 6px 16px rgba(128,0,128,.25)}
+  .btn.primary:hover{background:linear-gradient(180deg,var(--brand-2),var(--brand));box-shadow:0 8px 20px rgba(128,0,128,.35);transform:translateY(-1px)}
+  .btn.ghost{background:#fff;border-color:var(--line);color:#1f2937}
+  .btn.ghost:hover{border-color:var(--brand);color:var(--brand)}
+  .hamburger{display:none}
+  #nav-toggle{display:none}
+  @media (max-width:980px){
+    .bar{grid-template-columns:auto auto 1fr;gap:10px}
+    .brand img{height:48px}
+    .hamburger{border:none;border-radius:10px;padding:8px 10px;background:#fff;cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:700;color:#374151}
+    nav{justify-content:flex-end}
+    .nav{position:fixed;inset:64px 16px auto 16px;flex-direction:column;gap:10px;padding:14px;border:none;background:#fff;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.08);display:none;z-index:60;/* undo desktop spread for mobile */width:auto;justify-content:flex-start;white-space:normal}
+    #nav-toggle:checked ~ nav .nav{display:flex}
+    .actions{gap:8px}
+    .phone{padding:6px 10px}
+    .btn{height:36px;padding:0 12px}
+  }
+  a:focus-visible,.btn:focus-visible,.hamburger:focus-visible,.phone:focus-visible{outline:3px solid rgba(128,0,128,.35);outline-offset:2px;border-radius:12px}
+
+
+/* --- Dropdowns (fixed) --- */
+.nav li{ position:relative; } /* keep this */
+
+.subnav{
+  position:absolute;
+  top:100%;            /* was: calc(100% + 10px) → remove the gap */
+  left:0;
+  min-width:220px;
+  background:#fff;
+  border:none;
+  border-radius:12px;
+  box-shadow:0 14px 36px rgba(0,0,0,.12);
+  padding:8px;         /* gives a visual offset without creating a real gap */
+  opacity:0;
+  transform:translateY(6px);
+  pointer-events:none;
+  transition:opacity .15s ease, transform .15s ease;
+  z-index:70;
 }
 
-/* Keep the two password fields nicely spaced when revealed */
-#checkoutModal #accountFields.open .ck-field{
-  margin-bottom: 12px;
+/* Invisible hover bridge to prevent flicker when moving down */
+.subnav::before{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  top:-8px;            /* sits above the submenu */
+  height:8px;          /* fills the 'gap' so hover doesn't drop */
+}
+
+.has-sub:hover > .subnav,
+.has-sub:focus-within > .subnav{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+
+.subnav a{
+  display:block;
+  padding:9px 10px;
+  border-radius:8px;
+  color:#374151;
+  font-weight:600;
+  white-space:nowrap;
+}
+.subnav a:hover{
+  background:#faf7fb;
+  color:var(--brand);
+}
+
+/* Mobile: keep as list items */
+@media (max-width:980px){
+  .nav .subnav{
+    position:static;
+    border:0;
+    box-shadow:none;
+    opacity:1;
+    transform:none;
+    pointer-events:auto;
+    padding:6px 0 0;
+  }
+  .nav .subnav::before{ display:none; }
+  .nav .subnav a{ padding:8px 10px 8px 14px; }
 }
 
 
+
+  /* Footer (same look you approved) */
+  .site-footer{background:#111;color:#ddd;font-size:15px;line-height:1.6;padding-top:50px}
+  .footer-grid{display:grid;gap:40px;grid-template-columns: 1.2fr 1fr 1fr}
+  @media(max-width:900px){ .footer-grid{grid-template-columns:1fr 1fr} }
+  @media(max-width:640px){ .footer-grid{grid-template-columns:1fr} }
+  .foot-title{color:#fff;font-weight:800;margin:0 0 12px;font-size:16px;text-transform:uppercase;position:relative}
+  .foot-title::after{content:"";display:block;width:40px;height:2px;background:var(--brand);margin-top:6px}
+  .footer-text{margin-bottom:14px;max-width:500px;color:#ccc}
+  .footer-cta{margin-top:6px;display:inline-block;font-size:14px;padding:8px 18px}
+  .footer-social{margin-top:16px;display:flex;gap:12px}
+  .footer-social a{width:34px;height:34px;border-radius:50%;background:#222;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:15px}
+  .footer-social a:hover{background:var(--brand);color:#fff}
+  .foot-links{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 24px}
+  .foot-links a{color:#ddd;font-weight:500}
+  .foot-links a:hover{color:#fff}
+  .contact-list{list-style:none;padding:0;margin:0 0 14px;display:flex;flex-direction:column;gap:10px}
+  .contact-list i{margin-right:8px;color:var(--brand)}
+  .contact-list a{color:#ddd}
+  .contact-list a:hover{color:#fff}
+  .hours-label{display:block;font-size:13px;color:#aaa;margin-bottom:2px;text-transform:uppercase}
+  .hours-value{color:#eee}
+  .footer-bottom{border-top:1px solid #222;margin-top:40px;padding:18px 0;font-size:13px;color:#999}
+  .footer-bottom-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .footer-bottom a{color:#999;margin-left:14px}
+  .footer-bottom a:hover{color:#fff}
 
 </style>
 </head>
 <body>
-
 <!-- ===== Announcement ===== -->
 <div class="announce" role="region" aria-label="Announcement">
   <div class="container announce-inner">
     <div>Congratulations to our talented winemakers—medal winners at the 2025 Garden State Amateur Wine Challenge, including a <strong>“Best Red”</strong> gold honor!</div>
-    <div><a href="#">Already have an account? Log in</a></div>
+    <div><a href="https://makewinewithus.com/login">Already have an account? Log in</a></div>
   </div>
 </div>
 
@@ -367,31 +400,35 @@
     <label class="hamburger" for="nav-toggle" aria-label="Toggle menu">☰ Menu</label>
     <input id="nav-toggle" type="checkbox" aria-hidden="true"/>
 
-    <nav aria-label="Primary">
-      <ul class="nav" id="nav">
-        <li class="has-sub">
-          <a href="/process">Winemaking Process</a>
-          <div class="subnav" role="menu">
-            <a href="/wines-you-can-make" role="menuitem">Wines You Can Make</a>
-            <a href="/label-making" role="menuitem">Label Making</a>
-          </div>
-        </li>
+<nav aria-label="Primary">
+  <ul class="nav" id="nav">
+    <!-- Winemaking Process + submenu -->
+    <li class="has-sub">
+      <a href="https://makewinewithus.com/winemaking-process">Winemaking Process</a>
+      <div class="subnav" role="menu">
+        <a href="https://makewinewithus.com/new-product-list" role="menuitem">Wines You Can Make</a>
+        <a href="https://makewinewithus.com/design-your-custom-bottle" role="menuitem">Label Making</a>
+      </div>
+    </li>
 
-        <li><a href="/regions">Regions</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/faqs">FAQs</a></li>
+    <li><a href="https://makewinewithus.com/region">Regions</a></li>
+    <li><a href="https://makewinewithus.com/about">About</a></li>
+    <li><a href="https://makewinewithus.com/faq-s">FAQs</a></li>
 
-        <li class="has-sub">
-          <a href="/events" aria-current="page">Events</a>
-          <div class="subnav" role="menu">
-            <a href="/events/private" role="menuitem">Private Events</a>
-            <a href="/events/upcoming" role="menuitem">Upcoming Events</a>
-          </div>
-        </li>
+    <!-- Events + submenu -->
+    <li class="has-sub">
+      <a href="https://makewinewithus.com/upcoming-events" aria-current="page">Events</a>
+      <div class="subnav" role="menu">
+        <a href="https://makewinewithus.com/private-events" role="menuitem">Private Events</a>
+        <a href="https://makewinewithus.com/upcoming-events" role="menuitem">Upcoming Events</a>
+      </div>
+    </li>
 
-        <li><a href="/contact">Contact</a></li>
-      </ul>
-    </nav>
+    <li><a href="https://makewinewithus.com/contact">Contact</a></li>
+  </ul>
+</nav>
+
+
 
     <div class="actions">
       <a class="phone" href="tel:+12018769463" aria-label="Call Make Wine With Us">
@@ -406,15 +443,11 @@
         <a href="https://www.instagram.com/makewinewithus/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5m0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5m6.25-3.5a1.25 1.25 0 1 1-1.25 1.25A1.25 1.25 0 0 1 18.25 6z"/></svg>
         </a>
-      </div>
-
-      <a class="btn ghost" href="#">Create an Account</a>
-      <a class="btn primary" href="#">Make Wine Now</a>
+      </div><a class="btn primary" href="https://makewinewithus.com/create-account">Make Wine Now</a>
     </div>
   </div>
 </header>
-
-<!-- ===== Registration Content ===== -->
+<!-- ===== Registration Content (sections only) ===== -->
 <main id="event-reg">
   <div class="container">
     <!-- Featured image -->
@@ -459,17 +492,10 @@
         </div>
 
         <div class="event-desc">
-
-<p>Make Wine With Us in Wallington, NJ is excited to present The Boys Are Back In Town on Friday, September 13th at 6:30 PM — a throwback musical experience you won’t want to miss.</p>
-
-<p>Enjoy live performances by Phil Miuccio, the King of Swing, and Jerry Lanzerotti, the King of Doo-Wop, as they bring timeless classics from the Rat Pack era and the golden hits of the 50s and 60s. Whether you're a fan of smooth crooning or doo-wop harmonies, this evening is designed to get you dancing.</p>
-
-<p>To keep the energy going, AE Entertainment will be spinning extended dance tracks after the show. Feel free to bring your own food and drinks — and your dancing shoes! Tickets are $30 per person, and proceeds benefit the American Wine Society Education Foundation, supporting wine education and research nationwide.</p>
-
-<p>Reserve your spot today and enjoy a night that hits all the right notes.</p>
-
-
-
+          <p>Make Wine With Us in Wallington, NJ is excited to present The Boys Are Back In Town on Friday, September 13th at 6:30 PM — a throwback musical experience you won’t want to miss.</p>
+          <p>Enjoy live performances by Phil Miuccio, the King of Swing, and Jerry Lanzerotti, the King of Doo-Wop, as they bring timeless classics from the Rat Pack era and the golden hits of the 50s and 60s. Whether you're a fan of smooth crooning or doo-wop harmonies, this evening is designed to get you dancing.</p>
+          <p>To keep the energy going, AE Entertainment will be spinning extended dance tracks after the show. Feel free to bring your own food and drinks — and your dancing shoes! Tickets are $30 per person, and proceeds benefit the American Wine Society Education Foundation, supporting wine education and research nationwide.</p>
+          <p>Reserve your spot today and enjoy a night that hits all the right notes.</p>
         </div>
       </section>
 
@@ -495,55 +521,7 @@
   </div>
 </main>
 
-<!-- ===== Footer ===== -->
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div class="footer-col">
-      <h3 class="foot-title">About Make Wine With Us</h3>
-      <p class="footer-text">
-        Craft small-batch wines from premium grapes with guidance from American Wine Society instructors. Choose, crush, age, and bottle — and take your vintage home.
-      </p>
-      <a href="#" class="btn primary footer-cta">Become a Winemaker</a>
-      <div class="footer-social">
-        <a href="https://www.instagram.com/makewinewithus/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.facebook.com/MakeWineWithUs" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-      </div>
-    </div>
-
-    <div class="footer-col">
-      <h3 class="foot-title">Explore</h3>
-      <ul class="foot-links">
-        <li><a href="#">About</a></li><li><a href="#">Winemaking Process</a></li>
-        <li><a href="#">Wines You Can Make</a></li><li><a href="#">Regions</a></li>
-        <li><a href="#">Blog</a></li><li><a href="#">FAQs</a></li>
-        <li><a href="#">Events</a></li><li><a href="#">Private Events</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h3 class="foot-title">Have a Question?</h3>
-      <ul class="contact-list">
-        <li><i class="fas fa-map-marker-alt"></i>21 Curie Avenue, Wallington, NJ 07057</li>
-        <li><i class="fas fa-phone-alt"></i><a href="tel:+12018769463">(201) 876-9463</a></li>
-        <li><i class="fas fa-envelope"></i><a href="mailto:info@makewinewithus.com">info@makewinewithus.com</a></li>
-      </ul>
-      <div class="hours">
-        <span class="hours-label">Hours</span>
-        <span class="hours-value">Mon–Fri 12–8pm · Sat 10–6pm</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <div class="container footer-bottom-inner">
-      <p>© 2025 Make Wine With Us. All rights reserved.</p>
-      <div class="foot-legal"><a href="#">Privacy</a><a href="#">Terms</a></div>
-    </div>
-  </div>
-</footer>
-
-<!-- ===== CHECKOUT MODALS ===== -->
+<!-- ===== CHECKOUT MODALS (sections) ===== -->
 <!-- Checkout -->
 <div id="checkoutModal" class="modal" hidden aria-hidden="true">
   <div class="ck-dialog" role="dialog" aria-modal="true" aria-labelledby="ckTitle">
@@ -577,7 +555,7 @@
             </div>
             <div class="ck-field">
               <label for="phone">Primary Phone*</label>
-              <input id="phone" name="phone" type="tel" required placeholder="(201) 876-9463" pattern="^[0-9+\\-\\s()]{10,}$" />
+              <input id="phone" name="phone" type="tel" required placeholder="(201) 876-9463" pattern="^[0-9+\-\s()]{10,}$" />
             </div>
           </div>
 
@@ -649,8 +627,53 @@
     </div>
   </div>
 </div>
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <h3 class="foot-title">About Make Wine With Us</h3>
+      <p class="footer-text">
+        Enjoy a unique winemaking experience - craft your own wine from premium grapes with guidance from our expert staff. Aged to perfection over a 9-month period, your wine is then bottled by you and taken home to savor and share.
+      </p>
+      <a href="https://makewinewithus.com/create-account" class="btn primary footer-cta">Become a Winemaker</a>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/makewinewithus/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/MakeWineWithUs" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      </div>
+    </div>
 
+    <div class="footer-col">
+      <h3 class="foot-title">Explore</h3>
+      <ul class="foot-links">
+        <li><a href="https://makewinewithus.com/about">About</a></li><li><a href="https://makewinewithus.com/winemaking-process">Winemaking Process</a></li>
+        <li><a href="https://makewinewithus.com/new-product-list">Wines You Can Make</a></li><li><a href="https://makewinewithus.com/region">Regions</a></li>
+        <li><a href="https://makewinewithus.com/blog">Blog</a></li><li><a href="https://makewinewithus.com/faq-s">FAQs</a></li>
+        <li><a href="https://makewinewithus.com/upcoming-events">Events</a></li><li><a href="https://makewinewithus.com/private-events">Private Events</a></li>
+        <li><a href="https://makewinewithus.com/contact">Contact</a></li>
+      </ul>
+    </div>
 
+    <div class="footer-col">
+      <h3 class="foot-title">Have a Question?</h3>
+      <ul class="contact-list">
+        <li><i class="fas fa-map-marker-alt"></i>21 Curie Avenue, Wallington, NJ 07057</li>
+        <li><i class="fas fa-phone-alt"></i><a href="tel:+12018769463">(201) 876-9463</a></li>
+        <li><i class="fas fa-envelope"></i><a href="mailto:info@makewinewithus.com">info@makewinewithus.com</a></li>
+      </ul>
+      <div class="hours">
+        <span class="hours-label">Hours</span>
+        <span class="hours-value">Closed today</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© 2025 Make Wine With Us. All rights reserved.</p>
+      <div class="foot-legal"><a href="https://makewinewithus.com/privacy-policy">Privacy</a><a href="https://makewinewithus.com/terms-of-service">Terms</a></div>
+    </div>
+  </div>
+</footer>
 
 <!-- ===== Quantity / Register behavior ===== -->
 <script>
@@ -718,9 +741,8 @@
     // Open checkout
     btn.addEventListener('click', () => {
       if(btn.disabled) return;
-      ckForm.reset();                         // clear previous entries
+      ckForm.reset();
       ckForm.classList.remove('was-validated');
-      // set qty from sidebar, default to 1 if somehow zero
       const startQty = Math.max(1, clamp(input.value));
       ckQty.value = startQty;
       updateSummary(startQty);
@@ -737,7 +759,6 @@
     // Create account reveal
     createAccount.addEventListener('change', () => {
       accountFields.classList.toggle('open', createAccount.checked);
-      // Make pw required only if checked
       password.required = confirmPassword.required = createAccount.checked;
     });
 
@@ -747,15 +768,16 @@
     });
 
     // Leave confirmation buttons
-    stayBtn.addEventListener('click', () => { closeModal(leaveModal); /* back to checkout */ });
+    stayBtn.addEventListener('click', () => { closeModal(leaveModal); });
     leaveBtn.addEventListener('click', () => { closeModal(leaveModal); closeModal(ckModal); });
 
-    // Click outside dialog to keep behavior tight (don’t close)
+    // Prevent click-outside closing on checkout modal
     ckModal.addEventListener('click', (e) => {
-      if(e.target === ckModal){ /* do nothing to avoid accidental close */ }
+      if(e.target === ckModal){ /* do nothing */ }
     });
+    // Allow tap-outside to cancel leave modal
     leaveModal.addEventListener('click', (e) => {
-      if(e.target === leaveModal){ closeModal(leaveModal); }  // tap outside = cancel leave
+      if(e.target === leaveModal){ closeModal(leaveModal); }
     });
 
     // Submit with validation-once behavior
@@ -763,7 +785,6 @@
       e.preventDefault();
       ckForm.classList.add('was-validated');
 
-      // simple confirm password check
       if (createAccount.checked && password.value !== confirmPassword.value){
         confirmPassword.setCustomValidity("Passwords do not match");
       } else {
@@ -771,23 +792,96 @@
       }
 
       if (!ckForm.checkValidity()){
-        // invalid → show reds via .was-validated
         return;
       }
 
-      // Success path (placeholder)
       closeModal(ckModal);
       alert("Thanks! Your registration has been started for " + ckQty.value + " ticket(s).");
-      // TODO: replace alert with real checkout integration as needed.
     });
   })();
-</script>
+// Dynamic business hours (America/New_York)
+(function(){
+  const tz = 'America/New_York';
+  // 0=Sun..6=Sat
+  const schedule = [
+    null,                                   // Sun - Closed
+    null,                                   // Mon - Closed
+    {open:[13,0], close:[17,0]},            // Tue 1pm–5pm
+    {open:[13,0], close:[18,0]},            // Wed 1pm–6pm
+    {open:[13,0], close:[18,0]},            // Thu 1pm–6pm
+    {open:[13,0], close:[18,0]},            // Fri 1pm–6pm
+    null                                    // Sat - Closed
+  ];
+  const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
+  function getParts(d){
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: tz, weekday:'short', year:'numeric', month:'2-digit', day:'2-digit',
+      hour:'2-digit', minute:'2-digit', hour12:false
+    }).formatToParts(d);
+    const map = {};
+    for(const p of parts) map[p.type] = p.value;
+    const dayIdx = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(map.weekday);
+    return { dayIdx, hour:parseInt(map.hour,10), minute:parseInt(map.minute,10) };
+  }
+
+  function fmtTime([h,m]){
+    const ampm = h>=12 ? 'PM' : 'AM';
+    const h12 = ((h+11)%12)+1;
+    const mm = String(m).padStart(2,'0');
+    return `${h12}:${mm} ${ampm}`;
+  }
+
+  function nextOpenFrom(idx){
+    for(let i=1;i<=7;i++){
+      const n = (idx + i) % 7;
+      if (schedule[n]) return {dayIdx:n, opening:schedule[n].open};
+    }
+    return null;
+  }
+
+  const nowParts = getParts(new Date());
+  const target = document.querySelector('.hours .hours-value');
+  if(!target){ return; }
+
+  const today = schedule[nowParts.dayIdx];
+  if(!today){
+    // Closed all day
+    target.textContent = 'Closed today';
+    return;
+  }
+
+  const nowMin = nowParts.hour*60 + nowParts.minute;
+  const openMin = today.open[0]*60 + today.open[1];
+  const closeMin = today.close[0]*60 + today.close[1];
+
+  if(nowMin < openMin){
+    // Opens later today
+    target.textContent = `Closed · Opens at ${fmtTime(today.open)}`;
+  } else if(nowMin >= openMin && nowMin < closeMin){
+    // Open now
+    target.textContent = `Open now · Closes at ${fmtTime(today.close)}`;
+  } else {
+    // After closing
+    const next = nextOpenFrom(nowParts.dayIdx);
+    if(next){
+      const tomorrowIdx = (nowParts.dayIdx + 1) % 7;
+      if(next.dayIdx === tomorrowIdx){
+        target.textContent = `Closed · Opens tomorrow at ${fmtTime(next.opening)}`;
+      } else {
+        // Fallback for multi-day gaps (e.g., weekend)
+        target.textContent = `Closed · Opens ${dayNames[next.dayIdx]} at ${fmtTime(next.opening)}`;
+      }
+    } else {
+      target.textContent = 'Closed today';
+    }
+  }
+})();
+
+</script>
 
 </body>
 </html>
-
-
 
 
 
